@@ -54,12 +54,21 @@ incomeForm.addEventListener("submit", e => {
 		localStorage.setItem("balance", balance)
 		balanceElement.textContent = `Баланс: ${balance}`
 	}
+	incomeInputs.forEach(input => {
+		input.addEventListener("click", e => {
+			const parent = e.target.closest(".income__form-field")
+			const error = parent.querySelector(".form-error")
+			if (error) {
+				parent.removeChild(error)
+			}
+		})
+	})
 })
 
 function removeError(fieldSelector) {
 	const field = document.querySelector(fieldSelector)
 	const error = field.querySelector(".form-error")
-  if(!error) return;
+	if (!error) return
 	field.removeChild(error)
 }
 
