@@ -27,7 +27,7 @@ incomeForm.addEventListener("submit", e => {
 	} else if (title.length) {
 		removeError(".income__form-field_title")
 	}
-	if (size.length < 1 || !checkIsNumericInput(size)) {
+	if (size.length < 1 || !checkIsNumericInput(size) || parseFloat(size) < 0) {
 		const p = createErrorParagraph("Введите корректный доход")
 		const fieldSize = document.querySelector(".income__form-field_size")
 		if (!fieldSize.querySelector(".form-error")) {
@@ -53,15 +53,23 @@ incomeForm.addEventListener("submit", e => {
 		balance += parseFloat(size.replace(/ /g, ""))
 		localStorage.setItem("balance", balance)
 		balanceElement.textContent = `Баланс: ${balance}`
+    resetForm(incomeInputs)
 	}
-	incomeInputs.forEach(input => {
-		input.addEventListener("click", e => {
-			const parent = e.target.closest(".income__form-field")
-			const error = parent.querySelector(".form-error")
-			if (error) {
-				parent.removeChild(error)
-			}
-		})
+})
+
+function resetForm(inputs) {
+	inputs.forEach(input => {
+		input.value = ""
+	})
+}
+
+incomeInputs.forEach(input => {
+	input.addEventListener("click", e => {
+		const parent = e.target.closest(".income__form-field")
+		const error = parent.querySelector(".form-error")
+		if (error) {
+			parent.removeChild(error)
+		}
 	})
 })
 
