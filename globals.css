@@ -12,6 +12,15 @@ body {
 	color: white;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+li {
+  list-style-type: none;
+}
+
 .black-input {
 	background: #ffffff0b;
 	border: 1px solid #ffffff1a;
