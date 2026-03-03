@@ -1,0 +1,88 @@
+.income__form {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	flex: 1;
+}
+.costs__form {
+	flex: 1;
+}
+.costs__form-field {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	width: 100%;
+	margin-top: 20px;
+}
+.costs__input {
+	height: 48px;
+}
+
+.income__input {
+	height: 48px;
+}
+
+.costs__button-submit {
+	height: 36px;
+	width: 100%;
+}
+.income__form-field {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+.income__button-submit {
+	height: 36px;
+	width: 100%;
+}
+
+.main-form {
+	padding: 24px;
+}
+
+.form-label {
+	display: inline-block;
+}
+
+.container {
+	display: flex;
+	justify-content: center;
+	gap: 30px;
+	max-width: 1300px;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+.field-date {
+	height: 40px;
+	background: #ffffff0b;
+	color: #a1a1a1;
+	border: 1px solid #ffffff26;
+	border-radius: 10px;
+	padding: 12px;
+  position: relative;
+}
+
+.category-select {
+	height: 40px;
+	background: #ffffff0b;
+	border-radius: 10px;
+	padding: 10px;
+	color: #a1a1a1;
+	appearance: none;
+	outline: none;
+	border: 1px solid #ffffff26;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+.category-select option {
+	background: #171717;
+	margin-top: 10px;
+}
+
+.costs__button-submit {
+	margin-top: 20px;
+}
