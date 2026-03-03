@@ -9,7 +9,22 @@ const balanceElement = document.querySelector(".sidebar__balance")
 const incomeForm = document.querySelector(".income__form")
 const incomeInputs = document.querySelectorAll(".income__input")
 const incomeFormData = { title: "", size: 0, date: "" }
+const incomeArray = JSON.parse(localStorage.getItem("incomes")) ?? []
+
 balanceElement.textContent = `Баланс: ${balance}`
+
+if (incomeArray.length > 0) {
+	const tableBody = document.querySelector(".income-table__body")
+	for (let income of incomeArray) {
+		const row = document.createElement("tr")
+		for (let key in income) {
+			const cell = document.createElement("td")
+			cell.textContent = income[key]
+			row.appendChild(cell)
+		}
+		tableBody.appendChild(row)
+	}
+}
 
 incomeForm.addEventListener("submit", e => {
 	e.preventDefault()
@@ -53,7 +68,10 @@ incomeForm.addEventListener("submit", e => {
 		balance += parseFloat(size.replace(/ /g, ""))
 		localStorage.setItem("balance", balance)
 		balanceElement.textContent = `Баланс: ${balance}`
-    resetForm(incomeInputs)
+		appendRowInTable()
+		incomeArray.push(incomeFormData)
+		localStorage.setItem("incomes", JSON.stringify(incomeArray))
+		resetForm(incomeInputs)
 	}
 })
 
@@ -61,6 +79,17 @@ function resetForm(inputs) {
 	inputs.forEach(input => {
 		input.value = ""
 	})
+}
+
+function appendRowInTable() {
+	const tableBody = document.querySelector(".income-table__body")
+	const row = document.createElement("tr")
+	for (let key in incomeFormData) {
+		const cell = document.createElement("td")
+		cell.textContent = incomeFormData[key]
+		row.appendChild(cell)
+	}
+	tableBody.appendChild(row)
 }
 
 incomeInputs.forEach(input => {

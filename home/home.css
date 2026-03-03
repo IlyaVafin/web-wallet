@@ -3,10 +3,10 @@
 }
 
 .income__form {
-	flex: 1;
+	min-height: 550px;
 }
 .income__heading {
-  margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 
 .income__form-fields-wrapper {
@@ -45,7 +45,7 @@
 .income__button-submit {
 	height: 36px;
 	width: 100%;
-  margin-top: 40px;
+	margin-top: 40px;
 }
 
 .main-form {
@@ -145,9 +145,34 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	background: #262626;
 }
 
+.form-income-table {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+}
+
 .form-error {
 	position: absolute;
 	bottom: -25px;
 	font-size: 14px;
 	color: rgba(255, 60, 60, 0.788);
+}
+
+.income-table {
+	width: 100%;
+	border: 1px solid #262626;
+	border-collapse: collapse;
+}
+.income-table th {
+	border: 1px solid #262626;
+	padding: 8px;
+}
+.income-table tr {
+	border: 1px solid #262626;
+	text-align: center;
+}
+.income-table td {
+	border: 1px solid #262626;
+	padding: 8px;
 }

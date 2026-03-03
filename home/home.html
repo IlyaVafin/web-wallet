@@ -27,27 +27,38 @@
     </aside>
     <div class="container">
       <div class="forms">
-        <form class='income__form card main-form'>
-          <h2 class='income__heading'>Доходы</h2>
-          <div class="income__form-fields-wrapper">
-            <div class="income__form-field income__form-field_title">
-              <label class='form-label' for="income-name">Наименование дохода</label>
-              <input name='title' id='income-name' class='income__input black-input' type="text">
+        <div class="form-income-table">
+          <form class='income__form card main-form'>
+            <h2 class='income__heading'>Доходы</h2>
+            <div class="income__form-fields-wrapper">
+              <div class="income__form-field income__form-field_title">
+                <label class='form-label' for="income-name">Наименование дохода</label>
+                <input name='title' id='income-name' class='income__input black-input' type="text">
+              </div>
+              <div class="income__form-field income__form-field_child income__form-field_size">
+                <label class='form-label' for="income-input">
+                  Размер дохода
+                </label>
+                <input name='size' class='income__input black-input numeric-input' id='income-input'
+                  placeholder='Введите размер дохода' type='text' />
+              </div>
+              <div class="income__form-field income__form-field_date">
+                <label for="income-date">Дата</label>
+                <input name='date' id='income-date' class='income__input field-date' type='date' />
+              </div>
             </div>
-            <div class="income__form-field income__form-field_child income__form-field_size">
-              <label class='form-label' for="income-input">
-                Размер дохода
-              </label>
-              <input name='size' class='income__input black-input numeric-input' id='income-input'
-                placeholder='Введите размер дохода' type='text' />
-            </div>
-            <div class="income__form-field income__form-field_date">
-              <label for="income-date">Дата</label>
-              <input name='date' id='income-date' class='income__input field-date' type='date' />
-            </div>
-          </div>
-          <button class='button income__button-submit'>Сохранить</button>
-        </form>
+            <button class='button income__button-submit'>Сохранить</button>
+          </form>
+          <table class="income-table">
+            <thead>
+              <th>Название</th>
+              <th>Доход</th>
+              <th>Дата</th>
+            </thead>
+            <tbody class='income-table__body'>
+            </tbody>
+          </table>
+        </div>
         <form class='costs__form card main-form' action="">
           <h2>Расходы</h2>
           <div class="costs__form-field">
@@ -78,7 +89,7 @@
           <button class='button costs__button-submit'>Сохранить</button>
         </form>
       </div>
-      <div class="">dasdas</div>
+
     </div>
   </div>
   <script src='./home.js'></script>
