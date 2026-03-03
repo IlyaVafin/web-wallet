@@ -59,12 +59,14 @@
 
 .container {
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
 	gap: 30px;
-	max-width: 1300px;
-	margin: 0 auto;
-	margin-top: 20px;
+	padding: 32px;
 	flex: 1;
+}
+.forms {
+	display: flex;
+	gap: 20px;
 }
 .field-date {
 	height: 40px;
