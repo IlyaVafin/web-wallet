@@ -89,6 +89,18 @@
             </div>
             <button class='button costs__button-submit'>Сохранить</button>
           </form>
+          <div class="costs__filters">
+            <div class="costs__filter-category">
+              <label for="category-cost">Категория расхода</label> <br>
+              <select class='costs__input category-select' name="category" id="category-cost">
+                <option value="Развлечения">Развлечения</option>
+                <option value="Хобби">Хобби</option>
+                <option value="Еда">Еда</option>
+                <option value="Транспорт">Транспорт</option>
+                <option value="Туризм">Туризм</option>
+              </select>
+            </div>
+          </div>
           <table class='table'>
             <thead>
               <th>Наименование</th>
@@ -100,7 +112,6 @@
           </table>
         </div>
       </div>
-
     </div>
   </div>
   <script type='module' src='./home.js'></script>

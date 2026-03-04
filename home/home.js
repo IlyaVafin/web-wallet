@@ -104,6 +104,57 @@ function submitForm(
 	return isSuccess
 }
 
+function resetForm(inputs) {
+	inputs.forEach(input => {
+		input.value = ""
+	})
+}
+
+function appendRowInTable(tableBodySelector, store) {
+	const tableBody = document.querySelector(tableBodySelector)
+	const row = document.createElement("tr")	
+	row.classList.add("row-table")
+	for (let key in store) {
+		const cell = document.createElement("td")
+		cell.textContent = store[key]
+		if (cell.textContent) {
+			row.appendChild(cell)
+		}
+	}
+	tableBody.appendChild(row)
+}
+
+function removeErrorOnInputClick(inputs, parentSelector) {
+	inputs.forEach(input => {
+		input.addEventListener("click", e => {
+			const parent = e.target.closest(parentSelector)
+			const error = parent.querySelector(".form-error")
+			if (error) {
+				parent.removeChild(error)
+			}
+		})
+	})
+}
+
+function removeError(fieldSelector) {
+	const field = document.querySelector(fieldSelector)
+	const error = field.querySelector(".form-error")
+	if (!error) return
+	field.removeChild(error)
+}
+
+function checkIsNumericInput(value) {
+	if (value.length === 0) return true
+	return /^[1-9]\d*(\s\d+)*$/.test(value.trim())
+}
+
+function createErrorParagraph(textError) {
+	const p = document.createElement("p")
+	p.textContent = textError
+	p.className = "form-error"
+	return p
+}
+
 costsForm.addEventListener("submit", e => {
 	e.preventDefault()
 	const success = submitForm(
@@ -140,55 +191,11 @@ incomeForm.addEventListener("submit", e => {
 	}
 })
 
-function resetForm(inputs) {
-	inputs.forEach(input => {
-		input.value = ""
-	})
-}
-
-function appendRowInTable(tableBodySelector, store) {
-	const tableBody = document.querySelector(tableBodySelector)
-	const row = document.createElement("tr")
-	for (let key in store) {
-		const cell = document.createElement("td")
-		cell.textContent = store[key]
-		if (cell.textContent) {
-			row.appendChild(cell)
-		}
-	}
-	tableBody.appendChild(row)
-}
-
-function removeErrorOnInputClick(inputs, parentSelector) {
-	inputs.forEach(input => {
-		input.addEventListener("click", e => {
-			const parent = e.target.closest(parentSelector)
-			const error = parent.querySelector(".form-error")
-			if (error) {
-				parent.removeChild(error)
-			}
-		})
-	})
+function filterByCategory(data, category) {
+	
+	const filtered = data.filter(item => item.category === category)
+	return filtered
 }
 
 removeErrorOnInputClick(incomeInputs, ".income__form-field")
 removeErrorOnInputClick(costsInputs, ".costs__form-field")
-
-function removeError(fieldSelector) {
-	const field = document.querySelector(fieldSelector)
-	const error = field.querySelector(".form-error")
-	if (!error) return
-	field.removeChild(error)
-}
-
-function checkIsNumericInput(value) {
-	if (value.length === 0) return true
-	return /^[1-9]\d*(\s\d+)*$/.test(value.trim())
-}
-
-function createErrorParagraph(textError) {
-	const p = document.createElement("p")
-	p.textContent = textError
-	p.className = "form-error"
-	return p
-}

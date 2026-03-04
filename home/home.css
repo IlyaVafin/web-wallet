@@ -180,3 +180,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	border: 1px solid #262626;
 	padding: 8px;
 }
+.costs__filters {
+	display: flex;
+}
+.costs__filter-category {
+	display: flex;
+	flex-direction: column;
+}
