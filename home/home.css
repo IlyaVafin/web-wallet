@@ -70,6 +70,7 @@
 }
 .forms {
 	display: flex;
+	flex-wrap: wrap;
 	gap: 20px;
 }
 .field-date {
@@ -132,7 +133,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	padding: 8px;
 }
 
-.sidebar__logout {
+.button-logout {
 	background: #e5e5e5;
 	padding: 12px;
 	margin-top: 8px;
@@ -188,7 +189,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .costs__filters {
 	display: flex;
-	align-items: center;
+	align-items: end;
 	gap: 16px;
 }
 .filter-field {
@@ -196,7 +197,48 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	flex-direction: column;
 	gap: 10px;
 }
-
+.header {
+	display: none;
+}
 .none {
 	display: none;
+}
+.costs__filter-day::-webkit-outer-spin-button,
+.costs__filter-day::-webkit-inner-spin-button {
+	/* display: none; <- Crashes Chrome on hover */
+	-webkit-appearance: none;
+	margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.costs__filter-day[type="number"] {
+	-moz-appearance: textfield; /* Firefox */
+}
+
+@media (max-width: 768px) {
+	.header {
+		display: block;
+	}
+	.header__container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		max-width: 640px;
+		margin: 0 auto;
+		padding: 32px;
+	}
+	.header__list {
+		display: flex;
+		align-items: center;
+		gap: 16px;
+	}
+	.header__list-item
+	.header__logo {
+		font-size: 24px;
+	}
+	.sidebar {
+		display: none;
+	}
+	.forms {
+		flex-direction: column;
+	}
 }

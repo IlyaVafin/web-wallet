@@ -16,7 +16,8 @@ const incomeFormData = { title: "", size: 0, date: "" }
 const costsFormData = { title: "", size: 0, date: "", category: "" }
 const incomeArray = JSON.parse(localStorage.getItem("incomes")) ?? []
 const costsArray = JSON.parse(localStorage.getItem("costs")) ?? []
-const logoutButton = document.querySelector(".sidebar__logout")
+const logoutButton = document.querySelector(".button-logout")
+const filtersContainer = document.querySelector(".costs__filters")
 balanceElement.textContent = `Баланс: ${balance}`
 
 createTable(incomeArray, ".income-table__body", "income-row-table")
@@ -102,7 +103,7 @@ function submitForm(
 			type === "increment"
 				? balance + parseFloat(size.replace(/ /g, ""))
 				: balance - parseFloat(size.replace(/ /g, ""))
-		if(balance < 0) balance = 0
+		if (balance < 0) balance = 0
 		localStorage.setItem("balance", balance)
 		balanceElement.textContent = `Баланс: ${balance}`
 		const storeCopy = { ...store }
@@ -210,20 +211,6 @@ incomeForm.addEventListener("submit", e => {
 	}
 })
 
-select.addEventListener("change", e => {
-	filterByCategory(e.target.value)
-})
-
-function filterByCategory(category) {
-	const rows = document.querySelectorAll(".costs-row-table")
-	rows.forEach(row => {
-		if (row.children[3].textContent !== category) {
-			return false
-		} else {
-			return true
-		}
-	})
-}
 const MONTHS = [
 	"Январь",
 	"Февраль",
@@ -238,23 +225,19 @@ const MONTHS = [
 	"Ноябрь",
 	"Декабрь",
 ]
-selectMonths.addEventListener("change", e => {
-	filterByMonths(e.target.value)
-})
-
-function filterByMonths(month) {
-	const rows = document.querySelectorAll(".costs-row-table")
-	const monthNumber = MONTHS.indexOf(month)
-	rows.forEach(row => {
-		const dateCell = row.children[2].textContent
-		const date = new Date(dateCell)
-		if (date.getMonth() !== monthNumber) {
-			return false
-		} else {
-			return true
-		}
-	})
+const filters = {
+	category: "",
+	month: "",
+	day: "",
 }
+filtersContainer.addEventListener("change", e => {
+	console.log(e.target.value)
+	filters[e.target.dataset.filter] = e.target.value
+	const rows = document.querySelectorAll(".costs-row-table")
+	rows.forEach(row => {
+		const month = row.children[2]
+	})
+})
 
 logoutButton.addEventListener("click", () => {
 	document.cookie =

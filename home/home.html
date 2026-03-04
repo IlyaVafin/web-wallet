@@ -10,6 +10,24 @@
 </head>
 
 <body>
+  <header class='header'>
+    <div class="header__container">
+      <div class="header__logo">
+        <a href="/home/home.html"><img width='20' height='20' src='./../img/logo.svg' alt='' />
+          Web Wallet</a>
+      </div>
+      <nav class='header__nav'>
+        <ul class='header__list'>
+          <li class='header__list-item'>
+            <a href="/change-password/change-password.html">Сменить пароль</a>
+          </li>
+          <li class='header__list-item'>
+            <button class='button-logout button'>Выйти из аккаунта</button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
   <div class="main-page-wrapper">
     <aside class='sidebar'>
       <a href='/home/home.html' class='sidebar__heading'><img width='20' height='20' src='./../img/logo.svg' alt='' />
@@ -19,7 +37,7 @@
         <ul class='sidebar__list'>
           <li class='sidebar__list-item'><a href="/change-password/change-password.html">Сменить пароль</a></li>
           <li class=''>
-            <button class='sidebar__logout button'>Выйти из аккаунта</button>
+            <button class='button-logout button'>Выйти из аккаунта</button>
           </li>
         </ul>
       </nav>
@@ -91,7 +109,7 @@
           <div class="costs__filters">
             <div class="costs__filter-category filter-field">
               <label for="category-cost">Категория расхода</label>
-              <select class='select costs__input_select-filter' id="category-cost">
+              <select data-filter='category' class='select costs__input_select-filter' id="category-cost">
                 <option value="Развлечения">Развлечения</option>
                 <option value="Хобби">Хобби</option>
                 <option value="Еда">Еда</option>
@@ -101,7 +119,8 @@
             </div>
             <div class="costs__date-filter filter-field">
               <label for="">Месяц</label>
-              <select class='select costs__input_select-filter input-filter-date' id="category-cost">
+              <select data-filter='month' class='select costs__input_select-filter input-filter-date'
+                id="category-cost">
                 <option value="Январь">Январь</option>
                 <option value="Февраль">Февраль</option>
                 <option value="Март">Март</option>
@@ -115,6 +134,10 @@
                 <option value="Ноябрь">Ноябрь</option>
                 <option value="Декабрь">Декабрь</option>
               </select>
+            </div>
+            <div class="filter-field">
+              <label for="day">День</label>
+              <input data-filter="day" id='day' class='costs__filter-day select' type="number">
             </div>
           </div>
           <table class='table'>
