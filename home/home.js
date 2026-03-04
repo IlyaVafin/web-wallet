@@ -123,7 +123,7 @@ function resetForm(inputs) {
 function formatNumber(number) {
 	return new Intl.NumberFormat("ru-RU", {
 		useGrouping: true,
-	}).format(parseFloat(number))
+	}).format(parseFloat(number.replaceAll(" ", "")))
 }
 function appendRowInTable(tableBodySelector, store, rowClass) {
 	const tableBody = document.querySelector(tableBodySelector)
