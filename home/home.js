@@ -7,57 +7,80 @@ let balance = parseFloat(localStorage.getItem("balance") ?? 0)
 const numericInputs = document.querySelectorAll(".numeric-input")
 const balanceElement = document.querySelector(".sidebar__balance")
 const incomeForm = document.querySelector(".income__form")
+const costsForm = document.querySelector(".costs__form")
 const incomeInputs = document.querySelectorAll(".income__input")
+const costsInputs = document.querySelectorAll(".costs__input")
 const incomeFormData = { title: "", size: 0, date: "" }
+const costsFormData = { title: "", size: 0, date: "", category: "" }
 const incomeArray = JSON.parse(localStorage.getItem("incomes")) ?? []
-
+const costsArray = JSON.parse(localStorage.getItem("costs")) ?? []
 balanceElement.textContent = `Баланс: ${balance}`
 
-if (incomeArray.length > 0) {
-	const tableBody = document.querySelector(".income-table__body")
-	for (let income of incomeArray) {
-		const row = document.createElement("tr")
-		for (let key in income) {
-			const cell = document.createElement("td")
-			cell.textContent = income[key]
-			row.appendChild(cell)
+createTable(incomeArray, ".income-table__body")
+createTable(costsArray, ".costs__table-body")
+
+function createTable(data, tableBodySelector) {
+	if (data.length > 0) {
+		const tableBody = document.querySelector(tableBodySelector)
+		for (let item of data) {
+			const row = document.createElement("tr")
+			for (let key in item) {
+				const cell = document.createElement("td")
+				cell.textContent = item[key]
+				row.appendChild(cell)
+			}
+			tableBody.appendChild(row)
 		}
-		tableBody.appendChild(row)
 	}
 }
 
-incomeForm.addEventListener("submit", e => {
-	e.preventDefault()
-	incomeInputs.forEach(input => {
+function submitForm(
+	inputs,
+	store,
+	titleSelector,
+	sizeSelector,
+	sizeError,
+	dateSelector,
+	type,
+	arrayToAdd,
+	localStorageKey,
+) {
+	let isSuccess = true
+	inputs.forEach(input => {
 		const inputName = input.getAttribute("name")
-		incomeFormData[inputName] = input.value
+		store[inputName] = input.value
 	})
-	const { date, size, title } = incomeFormData
+	const { date, size, title, category } = store
+
 	if (title.length < 1) {
+		isSuccess = false
 		const p = createErrorParagraph("Наименование не может быть пустым")
-		const fieldTitle = document.querySelector(".income__form-field_title")
+		const fieldTitle = document.querySelector(titleSelector)
 		if (!fieldTitle.querySelector(".form-error")) {
 			fieldTitle.appendChild(p)
 		}
 	} else if (title.length) {
-		removeError(".income__form-field_title")
+		removeError(titleSelector)
 	}
-	if (size.length < 1 || !checkIsNumericInput(size) || parseFloat(size) < 0) {
-		const p = createErrorParagraph("Введите корректный доход")
-		const fieldSize = document.querySelector(".income__form-field_size")
+	if (size.length < 1 || !checkIsNumericInput(size)) {
+		isSuccess = false
+		const p = createErrorParagraph(sizeError)
+		const fieldSize = document.querySelector(sizeSelector)
 		if (!fieldSize.querySelector(".form-error")) {
 			fieldSize.appendChild(p)
 		}
 	} else if (size.length > 1 && checkIsNumericInput(size)) {
-		removeError(".income__form-field_size")
+		removeError(sizeSelector)
 	}
 	if (!date.length) {
+		isSuccess = false
 		const p = createErrorParagraph("Дата не может быть пустой")
-		const fieldDate = document.querySelector(".income__form-field_date")
+		const fieldDate = document.querySelector(dateSelector)
+
 		if (!fieldDate.querySelector(".form-error")) {
 			fieldDate.appendChild(p)
 		}
-	} else if (date.length) removeError(".income__form-field_date")
+	} else if (date.length) removeError(dateSelector)
 
 	if (
 		title.length &&
@@ -65,13 +88,55 @@ incomeForm.addEventListener("submit", e => {
 		checkIsNumericInput(size) &&
 		date.length
 	) {
-		balance += parseFloat(size.replace(/ /g, ""))
+		isSuccess = true
+		balance =
+			type === "increment"
+				? balance + parseFloat(size.replace(/ /g, ""))
+				: balance - parseFloat(size.replace(/ /g, ""))
 		localStorage.setItem("balance", balance)
 		balanceElement.textContent = `Баланс: ${balance}`
-		appendRowInTable()
-		incomeArray.push(incomeFormData)
-		localStorage.setItem("incomes", JSON.stringify(incomeArray))
-		resetForm(incomeInputs)
+		console.log(arrayToAdd)
+		store["category"] = category
+		arrayToAdd.push(store)
+		localStorage.setItem(localStorageKey, JSON.stringify(arrayToAdd))
+		resetForm(inputs)
+	}
+	return isSuccess
+}
+
+costsForm.addEventListener("submit", e => {
+	e.preventDefault()
+	const success = submitForm(
+		costsInputs,
+		costsFormData,
+		".costs__input_title",
+		".costs__input_size",
+		"Введите корректный расход",
+		".costs__input_date",
+		"decrement",
+		costsArray,
+		"costs",
+	)
+	if (success) {
+		appendRowInTable(".costs__table-body", costsFormData)
+	}
+})
+
+incomeForm.addEventListener("submit", e => {
+	e.preventDefault()
+	const success = submitForm(
+		incomeInputs,
+		incomeFormData,
+		".income__form-field_title",
+		".income__form-field_size",
+		"Доход не может быть отрицательным или пустым",
+		".income__form-field_date",
+		"increment",
+		incomeArray,
+		"incomes",
+	)
+	if (success) {
+		appendRowInTable(".income-table__body", incomeFormData)
 	}
 })
 
@@ -81,26 +146,33 @@ function resetForm(inputs) {
 	})
 }
 
-function appendRowInTable() {
-	const tableBody = document.querySelector(".income-table__body")
+function appendRowInTable(tableBodySelector, store) {
+	const tableBody = document.querySelector(tableBodySelector)
 	const row = document.createElement("tr")
-	for (let key in incomeFormData) {
+	for (let key in store) {
 		const cell = document.createElement("td")
-		cell.textContent = incomeFormData[key]
-		row.appendChild(cell)
+		cell.textContent = store[key]
+		if (cell.textContent) {
+			row.appendChild(cell)
+		}
 	}
 	tableBody.appendChild(row)
 }
 
-incomeInputs.forEach(input => {
-	input.addEventListener("click", e => {
-		const parent = e.target.closest(".income__form-field")
-		const error = parent.querySelector(".form-error")
-		if (error) {
-			parent.removeChild(error)
-		}
+function removeErrorOnInputClick(inputs, parentSelector) {
+	inputs.forEach(input => {
+		input.addEventListener("click", e => {
+			const parent = e.target.closest(parentSelector)
+			const error = parent.querySelector(".form-error")
+			if (error) {
+				parent.removeChild(error)
+			}
+		})
 	})
-})
+}
+
+removeErrorOnInputClick(incomeInputs, ".income__form-field")
+removeErrorOnInputClick(costsInputs, ".costs__form-field")
 
 function removeError(fieldSelector) {
 	const field = document.querySelector(fieldSelector)

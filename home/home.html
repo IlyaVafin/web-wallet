@@ -27,7 +27,7 @@
     </aside>
     <div class="container">
       <div class="forms">
-        <div class="form-income-table">
+        <div class="form-costs-table-wrapper">
           <form class='income__form card main-form'>
             <h2 class='income__heading'>Доходы</h2>
             <div class="income__form-fields-wrapper">
@@ -49,7 +49,7 @@
             </div>
             <button class='button income__button-submit'>Сохранить</button>
           </form>
-          <table class="income-table">
+          <table class="table">
             <thead>
               <th>Название</th>
               <th>Доход</th>
@@ -59,40 +59,51 @@
             </tbody>
           </table>
         </div>
-        <form class='costs__form card main-form' action="">
-          <h2>Расходы</h2>
-          <div class="costs__form-field">
-            <label class='form-label' for="income-name">Наименование расхода</label>
-            <input id='income-name' class='costs__input black-input' type="text">
-          </div>
-          <div class="costs__form-field costs__form-field_child">
-            <label class='form-label' for="costs-input">
-              Размер расхода
-            </label>
-            <input class='costs__input black-input numeric-input' id='costs-input' placeholder='Введите размер дохода'
-              type='text' />
-          </div>
-          <div class="costs__form-field">
-            <label for="costs-date">Дата</label>
-            <input id='costs-date' class='costs__form-date field-date' type='date' />
-          </div>
-          <div class="costs__form-field">
-            <label for="category-cost">Категория расхода</label>
-            <select class='category-select' name="category-cost" id="category-cost">
-              <option value="funny">Развлечения</option>
-              <option value="hobby">Хобби</option>
-              <option value="food">Еда</option>
-              <option value="transport">Транспорт</option>
-              <option value="tourism">Туризм</option>
-            </select>
-          </div>
-          <button class='button costs__button-submit'>Сохранить</button>
-        </form>
+        <div class="form-costs-table-wrapper">
+          <form class='costs__form card main-form' action="">
+            <h2>Расходы</h2>
+            <div class="costs__form-field costs__input_title">
+              <label class='form-label' for="income-name">Наименование расхода</label>
+              <input name='title' id='income-name' class='costs__input black-input ' type="text">
+            </div>
+            <div class="costs__form-field costs__form-field_child costs__input_size">
+              <label class='form-label' for="costs-input">
+                Размер расхода
+              </label>
+              <input name='size' class='costs__input black-input numeric-input ' id='costs-input'
+                placeholder='Введите размер дохода' type='text' />
+            </div>
+            <div class="costs__form-field costs__input_date">
+              <label for="costs-date">Дата</label>
+              <input name='date' id='costs-date' class='costs__input field-date' type='date' />
+            </div>
+            <div class="costs__form-field">
+              <label for="category-cost">Категория расхода</label>
+              <select class='costs__input category-select' name="category" id="category-cost">
+                <option value="Развлечения">Развлечения</option>
+                <option value="Хобби">Хобби</option>
+                <option value="Еда">Еда</option>
+                <option value="Транспорт">Транспорт</option>
+                <option value="Туризм">Туризм</option>
+              </select>
+            </div>
+            <button class='button costs__button-submit'>Сохранить</button>
+          </form>
+          <table class='table'>
+            <thead>
+              <th>Наименование</th>
+              <th>Расход</th>
+              <th>Дата</th>
+              <th>Категория</th>
+            </thead>
+            <tbody class='costs__table-body'></tbody>
+          </table>
+        </div>
       </div>
 
     </div>
   </div>
-  <script src='./home.js'></script>
+  <script type='module' src='./home.js'></script>
 </body>
 
 </html>
