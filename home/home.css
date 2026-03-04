@@ -131,6 +131,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .sidebar__list {
 	padding: 8px;
 }
+
+.sidebar__logout {
+	background: #e5e5e5;
+	padding: 12px;
+	margin-top: 8px;
+}
 .sidebar__list-item {
 	padding: 8px;
 	transition: background 0.3s ease;

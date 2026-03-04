@@ -16,6 +16,7 @@ const incomeFormData = { title: "", size: 0, date: "" }
 const costsFormData = { title: "", size: 0, date: "", category: "" }
 const incomeArray = JSON.parse(localStorage.getItem("incomes")) ?? []
 const costsArray = JSON.parse(localStorage.getItem("costs")) ?? []
+const logoutButton = document.querySelector(".sidebar__logout")
 balanceElement.textContent = `Баланс: ${balance}`
 
 createTable(incomeArray, ".income-table__body", "income-row-table")
@@ -101,6 +102,7 @@ function submitForm(
 			type === "increment"
 				? balance + parseFloat(size.replace(/ /g, ""))
 				: balance - parseFloat(size.replace(/ /g, ""))
+		if(balance < 0) balance = 0
 		localStorage.setItem("balance", balance)
 		balanceElement.textContent = `Баланс: ${balance}`
 		const storeCopy = { ...store }
@@ -253,6 +255,12 @@ function filterByMonths(month) {
 		}
 	})
 }
+
+logoutButton.addEventListener("click", () => {
+	document.cookie =
+		"isAuthorized=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
+	window.location.href = "/login/login.html"
+})
 
 removeErrorOnInputClick(incomeInputs, ".income__form-field")
 removeErrorOnInputClick(costsInputs, ".costs__form-field")
