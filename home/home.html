@@ -16,12 +16,7 @@
       <p class='sidebar__balance'>Баланс: </p>
       <nav class='sidebar__nav'>
         <ul class='sidebar__list'>
-          <li class='sidebar__list-item'><a href=""><img width='20' height='20'
-                src='./img/svg/banknote-arrow-up.svg' />Доходы</a></li>
-          <li class='sidebar__list-item'><a href=""><img width='20' height='20' src='./img/svg/hand-icon.svg'
-                alt='' />Расходы</a></li>
-          <li class='sidebar__list-item'><a href=""><img width='20' height='20' src='./img/svg/eye.svg'
-                alt='' />Обзор</a></li>
+          <li class='sidebar__list-item'><a href="">Сменить пароль</a></li>
         </ul>
       </nav>
     </aside>
@@ -92,7 +87,8 @@
           <div class="costs__filters">
             <div class="costs__filter-category">
               <label for="category-cost">Категория расхода</label> <br>
-              <select class='costs__input category-select' name="category" id="category-cost">
+              <select class='category-select costs__input_select-filter' name="category" id="category-cost">
+                <option value="Все">Все</option>
                 <option value="Развлечения">Развлечения</option>
                 <option value="Хобби">Хобби</option>
                 <option value="Еда">Еда</option>

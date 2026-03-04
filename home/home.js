@@ -10,23 +10,31 @@ const incomeForm = document.querySelector(".income__form")
 const costsForm = document.querySelector(".costs__form")
 const incomeInputs = document.querySelectorAll(".income__input")
 const costsInputs = document.querySelectorAll(".costs__input")
+const select = document.querySelector(".costs__input_select-filter")
+
 const incomeFormData = { title: "", size: 0, date: "" }
 const costsFormData = { title: "", size: 0, date: "", category: "" }
 const incomeArray = JSON.parse(localStorage.getItem("incomes")) ?? []
 const costsArray = JSON.parse(localStorage.getItem("costs")) ?? []
 balanceElement.textContent = `Баланс: ${balance}`
 
-createTable(incomeArray, ".income-table__body")
-createTable(costsArray, ".costs__table-body")
+createTable(incomeArray, ".income-table__body", "income-row-table")
+createTable(costsArray, ".costs__table-body", "costs-row-table")
 
-function createTable(data, tableBodySelector) {
+function createTable(data, tableBodySelector, rowClass) {
 	if (data.length > 0) {
 		const tableBody = document.querySelector(tableBodySelector)
 		for (let item of data) {
 			const row = document.createElement("tr")
+			const formatedNumber = formatNumber(item["size"])
+			row.className = rowClass
 			for (let key in item) {
 				const cell = document.createElement("td")
-				cell.textContent = item[key]
+				if (key === "size") {
+					cell.textContent = formatedNumber
+				} else {
+					cell.textContent = item[key]
+				}
 				row.appendChild(cell)
 			}
 			tableBody.appendChild(row)
@@ -106,17 +114,27 @@ function submitForm(
 
 function resetForm(inputs) {
 	inputs.forEach(input => {
+		if (input.classList.contains("category-select")) return
 		input.value = ""
 	})
 }
-
-function appendRowInTable(tableBodySelector, store) {
+function formatNumber(number) {
+	return new Intl.NumberFormat("ru-RU", {
+		useGrouping: true,
+	}).format(parseFloat(number))
+}
+function appendRowInTable(tableBodySelector, store, rowClass) {
 	const tableBody = document.querySelector(tableBodySelector)
-	const row = document.createElement("tr")	
-	row.classList.add("row-table")
+	const formatedNumber = formatNumber(store["size"])
+	const row = document.createElement("tr")
+	row.className = rowClass
 	for (let key in store) {
 		const cell = document.createElement("td")
-		cell.textContent = store[key]
+		if (key === "size") {
+			cell.textContent = formatedNumber
+		} else {
+			cell.textContent = store[key]
+		}
 		if (cell.textContent) {
 			row.appendChild(cell)
 		}
@@ -169,7 +187,7 @@ costsForm.addEventListener("submit", e => {
 		"costs",
 	)
 	if (success) {
-		appendRowInTable(".costs__table-body", costsFormData)
+		appendRowInTable(".costs__table-body", costsFormData, "costs-row-table")
 	}
 })
 
@@ -187,14 +205,29 @@ incomeForm.addEventListener("submit", e => {
 		"incomes",
 	)
 	if (success) {
-		appendRowInTable(".income-table__body", incomeFormData)
+		appendRowInTable(".income-table__body", incomeFormData, "income-row-table")
 	}
 })
 
-function filterByCategory(data, category) {
-	
-	const filtered = data.filter(item => item.category === category)
-	return filtered
+select.addEventListener("change", e => {
+	filterByCategory(e.target.value)
+})
+
+function filterByCategory(category) {
+	const rows = document.querySelectorAll(".costs-row-table")
+	if (category === "Все") {
+		rows.forEach(row => {
+			row.classList.remove("none")
+		})
+		return
+	}
+	rows.forEach(row => {
+		if (row.children[3].textContent !== category) {
+			row.classList.add("none")
+		} else {
+			row.classList.remove("none")
+		}
+	})
 }
 
 removeErrorOnInputClick(incomeInputs, ".income__form-field")
