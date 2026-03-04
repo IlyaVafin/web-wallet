@@ -75,7 +75,7 @@
             </div>
             <div class="costs__form-field">
               <label for="category-cost">Категория расхода</label>
-              <select class='costs__input category-select' name="category" id="category-cost">
+              <select class='costs__input select category-select' name="category" id="category-cost">
                 <option value="Развлечения">Развлечения</option>
                 <option value="Хобби">Хобби</option>
                 <option value="Еда">Еда</option>
@@ -86,15 +86,31 @@
             <button class='button costs__button-submit'>Сохранить</button>
           </form>
           <div class="costs__filters">
-            <div class="costs__filter-category">
-              <label for="category-cost">Категория расхода</label> <br>
-              <select class='category-select costs__input_select-filter' name="category" id="category-cost">
-                <option value="Все">Все</option>
+            <div class="costs__filter-category filter-field">
+              <label for="category-cost">Категория расхода</label>
+              <select class='select costs__input_select-filter' id="category-cost">
                 <option value="Развлечения">Развлечения</option>
                 <option value="Хобби">Хобби</option>
                 <option value="Еда">Еда</option>
                 <option value="Транспорт">Транспорт</option>
                 <option value="Туризм">Туризм</option>
+              </select>
+            </div>
+            <div class="costs__date-filter filter-field">
+              <label for="">Месяц</label>
+              <select class='select costs__input_select-filter input-filter-date' id="category-cost">
+                <option value="Январь">Январь</option>
+                <option value="Февраль">Февраль</option>
+                <option value="Март">Март</option>
+                <option value="Апрель">Апрель</option>
+                <option value="Май">Май</option>
+                <option value="Июнь">Июнь</option>
+                <option value="Июль">Июль</option>
+                <option value="Август">Август</option>
+                <option value="Сентябрь">Сентябрь</option>
+                <option value="Октябрь">Октябрь</option>
+                <option value="Ноябрь">Ноябрь</option>
+                <option value="Декабрь">Декабрь</option>
               </select>
             </div>
           </div>

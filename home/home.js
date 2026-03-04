@@ -11,7 +11,7 @@ const costsForm = document.querySelector(".costs__form")
 const incomeInputs = document.querySelectorAll(".income__input")
 const costsInputs = document.querySelectorAll(".costs__input")
 const select = document.querySelector(".costs__input_select-filter")
-
+const selectMonths = document.querySelector(".input-filter-date")
 const incomeFormData = { title: "", size: 0, date: "" }
 const costsFormData = { title: "", size: 0, date: "", category: "" }
 const incomeArray = JSON.parse(localStorage.getItem("incomes")) ?? []
@@ -103,9 +103,8 @@ function submitForm(
 				: balance - parseFloat(size.replace(/ /g, ""))
 		localStorage.setItem("balance", balance)
 		balanceElement.textContent = `Баланс: ${balance}`
-		console.log(arrayToAdd)
-		store["category"] = category
-		arrayToAdd.push(store)
+		const storeCopy = { ...store }
+		arrayToAdd.push(storeCopy)
 		localStorage.setItem(localStorageKey, JSON.stringify(arrayToAdd))
 		resetForm(inputs)
 	}
@@ -215,17 +214,42 @@ select.addEventListener("change", e => {
 
 function filterByCategory(category) {
 	const rows = document.querySelectorAll(".costs-row-table")
-	if (category === "Все") {
-		rows.forEach(row => {
-			row.classList.remove("none")
-		})
-		return
-	}
 	rows.forEach(row => {
 		if (row.children[3].textContent !== category) {
-			row.classList.add("none")
+			return false
 		} else {
-			row.classList.remove("none")
+			return true
+		}
+	})
+}
+const MONTHS = [
+	"Январь",
+	"Февраль",
+	"Март",
+	"Апрель",
+	"Май",
+	"Июнь",
+	"Июль",
+	"Август",
+	"Сентябрь",
+	"Октябрь",
+	"Ноябрь",
+	"Декабрь",
+]
+selectMonths.addEventListener("change", e => {
+	filterByMonths(e.target.value)
+})
+
+function filterByMonths(month) {
+	const rows = document.querySelectorAll(".costs-row-table")
+	const monthNumber = MONTHS.indexOf(month)
+	rows.forEach(row => {
+		const dateCell = row.children[2].textContent
+		const date = new Date(dateCell)
+		if (date.getMonth() !== monthNumber) {
+			return false
+		} else {
+			return true
 		}
 	})
 }

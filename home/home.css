@@ -82,7 +82,7 @@
 	position: relative;
 }
 
-.category-select {
+.select {
 	height: 40px;
 	background: #ffffff0b;
 	border-radius: 10px;
@@ -98,7 +98,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	cursor: pointer;
 }
 
-.category-select option {
+.select option {
 	background: #171717;
 	margin-top: 10px;
 }
@@ -182,10 +182,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .costs__filters {
 	display: flex;
+	align-items: center;
+	gap: 16px;
 }
-.costs__filter-category {
+.filter-field {
 	display: flex;
 	flex-direction: column;
+	gap: 10px;
 }
 
 .none {
