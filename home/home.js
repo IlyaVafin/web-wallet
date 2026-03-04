@@ -18,6 +18,7 @@ const incomeArray = JSON.parse(localStorage.getItem("incomes")) ?? []
 const costsArray = JSON.parse(localStorage.getItem("costs")) ?? []
 const logoutButton = document.querySelector(".button-logout")
 const filtersContainer = document.querySelector(".costs__filters")
+const totalCosts = document.querySelector(".costs__total")
 balanceElement.textContent = `Баланс: ${balance}`
 
 createTable(incomeArray, ".income-table__body", "income-row-table")
@@ -43,6 +44,20 @@ function createTable(data, tableBodySelector, rowClass) {
 		}
 	}
 }
+
+function sumTotal(rowSelector) {
+	const rows = document.querySelectorAll(rowSelector)
+	let sum = 0
+	rows.forEach(row => {
+		if (!row.classList.contains("none")) {
+			const size = row.children[1].textContent.replace(/\s+/g, "")
+			sum += parseFloat(size)
+		}
+	})
+	return sum
+}
+
+totalCosts.textContent = `Итого: ${formatNumber(String(sumTotal(".costs-row-table")))} рублей`
 
 function submitForm(
 	inputs,
@@ -231,12 +246,34 @@ const filters = {
 	day: "",
 }
 filtersContainer.addEventListener("change", e => {
-	console.log(e.target.value)
 	filters[e.target.dataset.filter] = e.target.value
 	const rows = document.querySelectorAll(".costs-row-table")
+
 	rows.forEach(row => {
-		const month = row.children[2]
+		const dateRow = new Date(row.children[2].textContent)
+		const monthRow = MONTHS[dateRow.getMonth()]
+		const dayRow = dateRow.getDate()
+		const category = row.children[3].textContent
+		let isShow = true
+		if (filters["month"] !== "" && monthRow !== filters["month"]) {
+			isShow = false
+		}
+		if (filters["day"] !== "" && dayRow !== parseFloat(filters["day"])) {
+			isShow = false
+		}
+		if (filters["category"] !== "" && category !== filters["category"])
+			isShow = false
+		if (!isShow) {
+			row.classList.add("none")
+		} else {
+			if (row.classList.contains("none")) {
+				row.classList.remove("none")
+			}
+		}
 	})
+	const totalSum = sumTotal(".costs-row-table")
+
+	totalCosts.textContent = `Итого: ${formatNumber(String(totalSum))} рублей`
 })
 
 logoutButton.addEventListener("click", () => {

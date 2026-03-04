@@ -136,7 +136,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .button-logout {
 	background: #e5e5e5;
 	padding: 12px;
-	margin-top: 8px;
 }
 .sidebar__list-item {
 	padding: 8px;
@@ -203,15 +202,18 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .none {
 	display: none;
 }
+.costs__total {
+	margin-bottom: 12px;
+	font-size: 18px;
+}
 .costs__filter-day::-webkit-outer-spin-button,
 .costs__filter-day::-webkit-inner-spin-button {
-	/* display: none; <- Crashes Chrome on hover */
 	-webkit-appearance: none;
-	margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+	margin: 0; 
 }
 
 .costs__filter-day[type="number"] {
-	-moz-appearance: textfield; /* Firefox */
+	-moz-appearance: textfield; 
 }
 
 @media (max-width: 768px) {
