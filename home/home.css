@@ -216,7 +216,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	-moz-appearance: textfield; 
 }
 
-@media (max-width: 768px) {
+@media (max-width: 800px) {
 	.header {
 		display: block;
 	}
@@ -224,8 +224,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		max-width: 640px;
-		margin: 0 auto;
 		padding: 32px;
 	}
 	.header__list {
@@ -242,5 +240,26 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	}
 	.forms {
 		flex-direction: column;
+	}
+}
+
+@media (max-width: 486px) {
+	.container {
+		padding: 12px;
+	}
+	.table {
+		font-size: 14px;
+	}
+	.costs__filters {
+		flex-wrap: wrap;
+	}
+	.header__list-item {
+		font-size: 12px;
+	}
+}
+
+@media (max-width: 435px) {
+	.table {
+		font-size: 12px;
 	}
 }
