@@ -79,7 +79,7 @@ function submitForm(
 		const inputName = input.getAttribute("name")
 		store[inputName] = input.value
 	})
-	const { date, size, title, category } = store
+	const { date, size, title } = store
 
 	if (title.length < 1) {
 		isSuccess = false
@@ -210,6 +210,8 @@ costsForm.addEventListener("submit", e => {
 	if (success) {
 		appendRowInTable(".costs__table-body", costsFormData, "costs-row-table")
 		costsOffer()
+
+		totalCosts.textContent = `Итого: ${formatNumber(String(sumTotal(".costs-row-table")))} рублей`
 	}
 })
 
@@ -228,6 +230,7 @@ incomeForm.addEventListener("submit", e => {
 	)
 	if (success) {
 		appendRowInTable(".income-table__body", incomeFormData, "income-row-table")
+		totalIncome.textContent = `Итого: ${formatNumber(String(sumTotal(".income-row-table")))} рублей`
 	}
 })
 
