@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 	const isAuthorized = Boolean(document.cookie.split(";")[0].split("=")[1])
-	if (!isAuthorized) window.location.href = "/login/login.html"
+	if (!isAuthorized) window.location.href = "/web-wallet/login/login.html"
 })
 
 let balance = parseFloat(localStorage.getItem("balance") ?? 0)

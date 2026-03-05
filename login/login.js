@@ -15,6 +15,6 @@ loginForm.addEventListener("submit", e => {
 		}
 	} else {
 		document.cookie = "isAuthorized=true;path=/;"
-		window.location.href = "/home/home.html"
+		window.location.href = "/web-wallet/home/home.html"
 	}
 })
