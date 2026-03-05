@@ -263,6 +263,33 @@ filtersContainer.addEventListener("change", e => {
 		}
 		if (filters["category"] !== "" && category !== filters["category"])
 			isShow = false
+		if (filters["category"] === "Все категории") {
+			isShow = true
+			if (
+				filters["month"] &&
+				monthRow !== filters["month"] &&
+				filters["month"] !== "Все месяцы"
+			)
+				isShow = false
+			if (filters["day"] && dayRow !== parseFloat(filters["day"])) isShow = false
+		}
+		if (filters["month"] === "Все месяцы") {
+			isShow = true
+			if (
+				filters["category"] &&
+				category !== filters["category"] &&
+				filters["category"] !== "Все категории"
+			)
+				isShow = false
+			if (filters["day"] && dayRow !== parseFloat(filters["day"])) isShow = false
+		}
+		if (
+			filters["month"] === "Все месяцы" &&
+			filters["category"] === "Все категории"
+		) {
+			isShow = true
+			if (filters["day"] && dayRow !== parseFloat(filters["day"])) isShow = false
+		}
 		if (!isShow) {
 			row.classList.add("none")
 		} else {
@@ -274,6 +301,8 @@ filtersContainer.addEventListener("change", e => {
 	const totalSum = sumTotal(".costs-row-table")
 
 	totalCosts.textContent = `Итого: ${formatNumber(String(totalSum))} рублей`
+	console.log(filters);
+	
 })
 
 logoutButton.addEventListener("click", () => {
