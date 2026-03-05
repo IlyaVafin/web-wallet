@@ -11,6 +11,7 @@
 
 .income__total {
 	margin-bottom: 12px;
+	font-size: 18px;
 }
 
 
@@ -267,11 +268,23 @@ input[type="number"] {
 	.header__list-item {
 		font-size: 14px;
 	}
+	.filter-field {
+		font-size: 14px;
+	}
+	.costs__total {
+		font-size: 16px;
+	}
+	.income__total {
+		font-size: 16px;
+	}
 }
 
 @media (max-width: 450px) {
 	.table {
 		font-size: 12px;
+	}
+	.select {
+		height: 36px;
 	}
 	.header__logo {
 		display: none;
