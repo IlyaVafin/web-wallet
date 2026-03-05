@@ -247,62 +247,27 @@ const filters = {
 }
 filtersContainer.addEventListener("change", e => {
 	filters[e.target.dataset.filter] = e.target.value
-	const rows = document.querySelectorAll(".costs-row-table")
 
-	rows.forEach(row => {
+	document.querySelectorAll(".costs-row-table").forEach(row => {
 		const dateRow = new Date(row.children[2].textContent)
 		const monthRow = MONTHS[dateRow.getMonth()]
 		const dayRow = dateRow.getDate()
 		const category = row.children[3].textContent
-		let isShow = true
-		if (filters["month"] !== "" && monthRow !== filters["month"]) {
-			isShow = false
-		}
-		if (filters["day"] !== "" && dayRow !== parseFloat(filters["day"])) {
-			isShow = false
-		}
-		if (filters["category"] !== "" && category !== filters["category"])
-			isShow = false
-		if (filters["category"] === "Все категории") {
-			isShow = true
-			if (
-				filters["month"] &&
-				monthRow !== filters["month"] &&
-				filters["month"] !== "Все месяцы"
-			)
-				isShow = false
-			if (filters["day"] && dayRow !== parseFloat(filters["day"])) isShow = false
-		}
-		if (filters["month"] === "Все месяцы") {
-			isShow = true
-			if (
-				filters["category"] &&
-				category !== filters["category"] &&
-				filters["category"] !== "Все категории"
-			)
-				isShow = false
-			if (filters["day"] && dayRow !== parseFloat(filters["day"])) isShow = false
-		}
-		if (
-			filters["month"] === "Все месяцы" &&
-			filters["category"] === "Все категории"
-		) {
-			isShow = true
-			if (filters["day"] && dayRow !== parseFloat(filters["day"])) isShow = false
-		}
-		if (!isShow) {
-			row.classList.add("none")
-		} else {
-			if (row.classList.contains("none")) {
-				row.classList.remove("none")
-			}
-		}
-	})
-	const totalSum = sumTotal(".costs-row-table")
 
+		const isShow =
+			(filters.category === "" ||
+				filters.category === "Все категории" ||
+				category === filters.category) &&
+			(filters.month === "" ||
+				filters.month === "Все месяцы" ||
+				monthRow === filters.month) &&
+			(filters.day === "" || dayRow === parseFloat(filters.day))
+
+		row.classList.toggle("none", !isShow)
+	})
+
+	const totalSum = sumTotal(".costs-row-table")
 	totalCosts.textContent = `Итого: ${formatNumber(String(totalSum))} рублей`
-	console.log(filters);
-	
 })
 
 logoutButton.addEventListener("click", () => {
