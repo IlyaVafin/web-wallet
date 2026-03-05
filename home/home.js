@@ -246,6 +246,7 @@ const filters = {
 	category: "",
 	month: "",
 	day: "",
+	week: ""
 }
 filtersContainer.addEventListener("change", e => {
 	filters[e.target.dataset.filter] = e.target.value
@@ -255,7 +256,7 @@ filtersContainer.addEventListener("change", e => {
 		const monthRow = MONTHS[dateRow.getMonth()]
 		const dayRow = dateRow.getDate()
 		const category = row.children[3].textContent
-
+		const weekNumber = Math.ceil(dateRow.getDate() / 7)
 		const isShow =
 			(filters.category === "" ||
 				filters.category === "Все категории" ||
@@ -263,7 +264,7 @@ filtersContainer.addEventListener("change", e => {
 			(filters.month === "" ||
 				filters.month === "Все месяцы" ||
 				monthRow === filters.month) &&
-			(filters.day === "" || dayRow === parseFloat(filters.day))
+			(filters.day === "" || dayRow === parseFloat(filters.day)) && (filters["week"] === "" || filters["week"] === "Все недели" || parseInt(filters["week"]) === parseInt(weekNumber))
 
 		row.classList.toggle("none", !isShow)
 	})
