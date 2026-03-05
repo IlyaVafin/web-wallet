@@ -217,7 +217,6 @@ costsForm.addEventListener("submit", e => {
 	if (success) {
 		appendRowInTable(".costs__table-body", costsFormData, "costs-row-table")
 		costsOffer()
-
 		totalCosts.textContent = `Итого: ${formatNumber(String(sumTotal(".costs-row-table")))} рублей`
 	}
 })
@@ -315,7 +314,7 @@ filterIncomeContainer.addEventListener("change", e => {
 		row.classList.toggle("none", !isShow)
 	})
 	const totalSum = sumTotal(".income-row-table")
-	totalIncome.textContent = `Итого: ${totalSum}`
+	totalIncome.textContent = `Итого: ${totalSum} рублей`
 })
 
 logoutButton.forEach(btn => {
