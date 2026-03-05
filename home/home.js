@@ -17,9 +17,9 @@ const costsFormData = { title: "", size: 0, date: "", category: "" }
 const incomeArray = JSON.parse(localStorage.getItem("incomes")) ?? []
 const costsArray = JSON.parse(localStorage.getItem("costs")) ?? []
 const logoutButton = document.querySelectorAll(".button-logout")
-console.log(logoutButton);
 
-const filtersContainer = document.querySelector(".costs__filters")
+const filterCostsContainer = document.querySelector(".costs__filters")
+const filterIncomeContainer = document.querySelector(".income__filters")
 const totalCosts = document.querySelector(".costs__total")
 balanceElement.textContent = `Баланс: ${balance}`
 
@@ -242,14 +242,14 @@ const MONTHS = [
 	"Ноябрь",
 	"Декабрь",
 ]
-const filters = {
+const costsFilters = {
 	category: "",
 	month: "",
 	day: "",
 	week: ""
 }
-filtersContainer.addEventListener("change", e => {
-	filters[e.target.dataset.filter] = e.target.value
+filterCostsContainer.addEventListener("change", e => {
+	costsFilters[e.target.dataset.filter] = e.target.value
 
 	document.querySelectorAll(".costs-row-table").forEach(row => {
 		const dateRow = new Date(row.children[2].textContent)
@@ -258,13 +258,13 @@ filtersContainer.addEventListener("change", e => {
 		const category = row.children[3].textContent
 		const weekNumber = Math.ceil(dateRow.getDate() / 7)
 		const isShow =
-			(filters.category === "" ||
-				filters.category === "Все категории" ||
-				category === filters.category) &&
-			(filters.month === "" ||
-				filters.month === "Все месяцы" ||
-				monthRow === filters.month) &&
-			(filters.day === "" || dayRow === parseFloat(filters.day)) && (filters["week"] === "" || filters["week"] === "Все недели" || parseInt(filters["week"]) === parseInt(weekNumber))
+			(costsFilters.category === "" ||
+				costsFilters.category === "Все категории" ||
+				category === costsFilters.category) &&
+			(costsFilters.month === "" ||
+				costsFilters.month === "Все месяцы" ||
+				monthRow === costsFilters.month) &&
+			(costsFilters.day === "" || dayRow === parseFloat(costsFilters.day)) && (costsFilters["week"] === "" || costsFilters["week"] === "Все недели" || parseInt(costsFilters["week"]) === parseInt(weekNumber))
 
 		row.classList.toggle("none", !isShow)
 	})
@@ -272,14 +272,40 @@ filtersContainer.addEventListener("change", e => {
 	const totalSum = sumTotal(".costs-row-table")
 	totalCosts.textContent = `Итого: ${formatNumber(String(totalSum))} рублей`
 })
-console.log(logoutButton);
+
+const incomeFilters = {
+	month: "",
+	day: "",
+	week: ""
+}
+
+filterIncomeContainer.addEventListener("change", e => {
+	incomeFilters[e.target.dataset.filter] = e.target.value
+	console.log(incomeFilters);
+	
+	document.querySelectorAll(".income-row-table").forEach(row => {
+		const dateRow = new Date(row.children[2].textContent)
+		const monthRow = MONTHS[dateRow.getMonth()]
+		const dayRow = dateRow.getDate()
+		const weekNumber = Math.ceil(dateRow.getDate() / 7)
+		const isShow =
+			(incomeFilters.month === "" ||
+				incomeFilters.month === "Все месяцы" ||
+				monthRow === incomeFilters.month) &&
+			(incomeFilters.day === "" || dayRow === parseFloat(incomeFilters.day)) && (incomeFilters["week"] === "" || incomeFilters["week"] === "Все недели" || parseInt(incomeFilters["week"]) === parseInt(weekNumber))
+
+		row.classList.toggle("none", !isShow)
+	})
+})
+
+
 
 logoutButton.forEach(btn => {
 	btn.addEventListener("click", () => {
-	document.cookie =
-		"isAuthorized=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
-	window.location.href = "/login/login.html"
-})
+		document.cookie =
+			"isAuthorized=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
+		window.location.href = "/login/login.html"
+	})
 })
 
 removeErrorOnInputClick(incomeInputs, ".income__form-field")
