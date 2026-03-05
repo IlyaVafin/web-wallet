@@ -43,6 +43,16 @@
       </nav>
     </aside>
     <div class="container">
+      <div class="offer">
+        <h2 class='offer__heading'>Предложения</h2>
+        <div class="offer__cards">
+          <div class="offer__card">
+            <h4 class='offer__heading-card'></h4>
+            <p class='offer__description'></p>
+            <p class='offer__advice'>Вы могли бы сэкономить на этой категории</p>
+          </div>
+        </div>
+      </div>
       <div class="forms">
         <div class="form-costs-table-wrapper">
           <form class='income__form card main-form'>
@@ -67,7 +77,6 @@
             <button class='button income__button-submit'>Сохранить</button>
           </form>
         </div>
-        <!--  -->
         <div class="form-costs-table-wrapper">
           <form class='costs__form card main-form' action="">
             <h2>Расходы</h2>
@@ -146,63 +155,63 @@
           </tbody>
         </table>
       </div>
-        <div class="costs__filters filters">
-            <div class="costs__filter-category filter-field">
-              <label for="category-cost">Категория расхода</label>
-              <select data-filter='category' class='select costs__input_select-filter' id="category-cost">
-                <option value="Все категории">Все</option>
-                <option value="Развлечения">Развлечения</option>
-                <option value="Хобби">Хобби</option>
-                <option value="Еда">Еда</option>
-                <option value="Транспорт">Транспорт</option>
-                <option value="Туризм">Туризм</option>
-              </select>
-            </div>
-            <div class="costs__date-filter filter-field">
-              <label for="costs-month">Месяц</label>
-              <select data-filter='month' class='select costs__input_select-filter input-filter-date' id="costs-month">
-                <option value="Все месяцы">Все</option>
-                <option value="Январь">Январь</option>
-                <option value="Февраль">Февраль</option>
-                <option value="Март">Март</option>
-                <option value="Апрель">Апрель</option>
-                <option value="Май">Май</option>
-                <option value="Июнь">Июнь</option>
-                <option value="Июль">Июль</option>
-                <option value="Август">Август</option>
-                <option value="Сентябрь">Сентябрь</option>
-                <option value="Октябрь">Октябрь</option>
-                <option value="Ноябрь">Ноябрь</option>
-                <option value="Декабрь">Декабрь</option>
-              </select>
-            </div>
-            <div class="filter-field">
-              <label for="day">День</label>
-              <input data-filter="day" id='day' class='costs__filter-day select' type="number">
-            </div>
-            <div class="filter-field">
-              <label for="week">Номер недели</label>
-              <select class="select" data-filter="week" id="week">
-                <option value="Все недели">Все</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-              </select>
-            </div>
-          </div>
-          <div class="">
-            <p class='costs__total'>Итого: 0</p>
-            <table class='table'>
-              <thead>
-                <th>Наименование</th>
-                <th>Расход</th>
-                <th>Дата</th>
-                <th>Категория</th>
-              </thead>
-              <tbody class='costs__table-body'></tbody>
-            </table>
-          </div>
+      <div class="costs__filters filters">
+        <div class="costs__filter-category filter-field">
+          <label for="category-cost">Категория расхода</label>
+          <select data-filter='category' class='select costs__input_select-filter' id="category-cost">
+            <option value="Все категории">Все</option>
+            <option value="Развлечения">Развлечения</option>
+            <option value="Хобби">Хобби</option>
+            <option value="Еда">Еда</option>
+            <option value="Транспорт">Транспорт</option>
+            <option value="Туризм">Туризм</option>
+          </select>
+        </div>
+        <div class="costs__date-filter filter-field">
+          <label for="costs-month">Месяц</label>
+          <select data-filter='month' class='select costs__input_select-filter input-filter-date' id="costs-month">
+            <option value="Все месяцы">Все</option>
+            <option value="Январь">Январь</option>
+            <option value="Февраль">Февраль</option>
+            <option value="Март">Март</option>
+            <option value="Апрель">Апрель</option>
+            <option value="Май">Май</option>
+            <option value="Июнь">Июнь</option>
+            <option value="Июль">Июль</option>
+            <option value="Август">Август</option>
+            <option value="Сентябрь">Сентябрь</option>
+            <option value="Октябрь">Октябрь</option>
+            <option value="Ноябрь">Ноябрь</option>
+            <option value="Декабрь">Декабрь</option>
+          </select>
+        </div>
+        <div class="filter-field">
+          <label for="day">День</label>
+          <input data-filter="day" id='day' class='costs__filter-day select' type="number">
+        </div>
+        <div class="filter-field">
+          <label for="week">Номер недели</label>
+          <select class="select" data-filter="week" id="week">
+            <option value="Все недели">Все</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </div>
+      </div>
+      <div class="">
+        <p class='costs__total'>Итого: 0</p>
+        <table class='table'>
+          <thead>
+            <th>Наименование</th>
+            <th>Расход</th>
+            <th>Дата</th>
+            <th>Категория</th>
+          </thead>
+          <tbody class='costs__table-body'></tbody>
+        </table>
+      </div>
     </div>
   </div>
   <script type='module' src='./home.js'></script>

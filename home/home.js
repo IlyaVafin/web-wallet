@@ -209,6 +209,7 @@ costsForm.addEventListener("submit", e => {
 	)
 	if (success) {
 		appendRowInTable(".costs__table-body", costsFormData, "costs-row-table")
+		costsOffer()
 	}
 })
 
@@ -314,6 +315,45 @@ logoutButton.forEach(btn => {
 		window.location.href = "/login/login.html"
 	})
 })
+
+function costsOffer() {
+	const rows = document.querySelectorAll(".costs-row-table")
+	const offerBlock = document.querySelector(".offer")
+	if (rows.length < 1) {
+		offerBlock.classList.add("hide")
+		return
+	} else {
+		offerBlock.classList.remove("hide")
+	}
+	const sum = sumTotal(".costs-row-table")
+	let categoriesSum = {
+		Развлечения: 0,
+		Хобби: 0,
+		Еда: 0,
+		Транспорт: 0,
+		Туризм: 0,
+	}
+	let max = 0
+	rows.forEach(row => {
+		const category = row.children[3].textContent
+		const size = row.children[1].textContent.replace(/\s+/g, "")
+		categoriesSum[category] += parseFloat(size)
+	})
+	for (let key in categoriesSum) {
+		max = Math.max(max, categoriesSum[key])
+	}
+	let largestCategory = ""
+	for (let key in categoriesSum) {
+		if (categoriesSum[key] === max) largestCategory = key
+	}
+	const headingOfferCard = document.querySelector(".offer__heading-card")
+	const description = document.querySelector(".offer__description")
+	const percent = Math.floor((max / sum) * 100)
+
+	description.textContent = `${percent}% расходов`
+	headingOfferCard.textContent = largestCategory
+}
+costsOffer()
 
 removeErrorOnInputClick(incomeInputs, ".income__form-field")
 removeErrorOnInputClick(costsInputs, ".costs__form-field")
