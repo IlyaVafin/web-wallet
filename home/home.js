@@ -217,6 +217,9 @@ costsForm.addEventListener("submit", e => {
 	if (success) {
 		appendRowInTable(".costs__table-body", costsFormData, "costs-row-table")
 		costsOffer()
+		balanceElement.forEach(el => {
+			el.textContent = `Баланс: ${balance}`
+		})
 		totalCosts.textContent = `Итого: ${formatNumber(String(sumTotal(".costs-row-table")))} рублей`
 	}
 })
@@ -236,6 +239,9 @@ incomeForm.addEventListener("submit", e => {
 	)
 	if (success) {
 		appendRowInTable(".income-table__body", incomeFormData, "income-row-table")
+		balanceElement.forEach(el => {
+			el.textContent = `Баланс: ${balance}`
+		})
 		totalIncome.textContent = `Итого: ${formatNumber(String(sumTotal(".income-row-table")))} рублей`
 	}
 })
