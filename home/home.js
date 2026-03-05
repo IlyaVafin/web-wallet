@@ -21,6 +21,7 @@ const logoutButton = document.querySelectorAll(".button-logout")
 const filterCostsContainer = document.querySelector(".costs__filters")
 const filterIncomeContainer = document.querySelector(".income__filters")
 const totalCosts = document.querySelector(".costs__total")
+const totalIncome = document.querySelector(".income__total")
 balanceElement.textContent = `Баланс: ${balance}`
 
 createTable(incomeArray, ".income-table__body", "income-row-table")
@@ -60,6 +61,7 @@ function sumTotal(rowSelector) {
 }
 
 totalCosts.textContent = `Итого: ${formatNumber(String(sumTotal(".costs-row-table")))} рублей`
+totalIncome.textContent = `Итого: ${formatNumber(String(sumTotal(".income-row-table")))} рублей`
 
 function submitForm(
 	inputs,
@@ -246,7 +248,7 @@ const costsFilters = {
 	category: "",
 	month: "",
 	day: "",
-	week: ""
+	week: "",
 }
 filterCostsContainer.addEventListener("change", e => {
 	costsFilters[e.target.dataset.filter] = e.target.value
@@ -264,7 +266,10 @@ filterCostsContainer.addEventListener("change", e => {
 			(costsFilters.month === "" ||
 				costsFilters.month === "Все месяцы" ||
 				monthRow === costsFilters.month) &&
-			(costsFilters.day === "" || dayRow === parseFloat(costsFilters.day)) && (costsFilters["week"] === "" || costsFilters["week"] === "Все недели" || parseInt(costsFilters["week"]) === parseInt(weekNumber))
+			(costsFilters.day === "" || dayRow === parseFloat(costsFilters.day)) &&
+			(costsFilters["week"] === "" ||
+				costsFilters["week"] === "Все недели" ||
+				parseInt(costsFilters["week"]) === parseInt(weekNumber))
 
 		row.classList.toggle("none", !isShow)
 	})
@@ -276,13 +281,12 @@ filterCostsContainer.addEventListener("change", e => {
 const incomeFilters = {
 	month: "",
 	day: "",
-	week: ""
+	week: "",
 }
 
 filterIncomeContainer.addEventListener("change", e => {
 	incomeFilters[e.target.dataset.filter] = e.target.value
-	console.log(incomeFilters);
-	
+
 	document.querySelectorAll(".income-row-table").forEach(row => {
 		const dateRow = new Date(row.children[2].textContent)
 		const monthRow = MONTHS[dateRow.getMonth()]
@@ -292,13 +296,16 @@ filterIncomeContainer.addEventListener("change", e => {
 			(incomeFilters.month === "" ||
 				incomeFilters.month === "Все месяцы" ||
 				monthRow === incomeFilters.month) &&
-			(incomeFilters.day === "" || dayRow === parseFloat(incomeFilters.day)) && (incomeFilters["week"] === "" || incomeFilters["week"] === "Все недели" || parseInt(incomeFilters["week"]) === parseInt(weekNumber))
+			(incomeFilters.day === "" || dayRow === parseFloat(incomeFilters.day)) &&
+			(incomeFilters["week"] === "" ||
+				incomeFilters["week"] === "Все недели" ||
+				parseInt(incomeFilters["week"]) === parseInt(weekNumber))
 
 		row.classList.toggle("none", !isShow)
 	})
+	const totalSum = sumTotal(".income-row-table")
+	totalIncome.textContent = `Итого: ${totalSum}`
 })
-
-
 
 logoutButton.forEach(btn => {
 	btn.addEventListener("click", () => {

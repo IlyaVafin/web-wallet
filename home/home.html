@@ -32,7 +32,7 @@
     <aside class='sidebar'>
       <a href='/home/home.html' class='sidebar__heading'><img width='20' height='20' src='./../img/logo.svg' alt='' />
         Web Wallet</a>
-      <p class='sidebar__balance'>Баланс: </p>
+      <p class='sidebar__balance'>Баланс: 0</p>
       <nav class='sidebar__nav'>
         <ul class='sidebar__list'>
           <li class='sidebar__list-item'><a href="/change-password/change-password.html">Сменить пароль</a></li>
@@ -66,42 +66,42 @@
             </div>
             <button class='button income__button-submit'>Сохранить</button>
           </form>
-          <div class="">
-            <div class="income__filters filters">
-              <div class="filter-field">
-                <label for="">Месяц</label>
-                <select data-filter='month' class='select costs__input_select-filter input-filter-date'
-                  id="category-cost">
-                  <option value="Все месяцы">Все</option>
-                  <option value="Январь">Январь</option>
-                  <option value="Февраль">Февраль</option>
-                  <option value="Март">Март</option>
-                  <option value="Апрель">Апрель</option>
-                  <option value="Май">Май</option>
-                  <option value="Июнь">Июнь</option>
-                  <option value="Июль">Июль</option>
-                  <option value="Август">Август</option>
-                  <option value="Сентябрь">Сентябрь</option>
-                  <option value="Октябрь">Октябрь</option>
-                  <option value="Ноябрь">Ноябрь</option>
-                  <option value="Декабрь">Декабрь</option>
-                </select>
-              </div>
-              <div class="filter-field">
-                <label for="income-day">День</label>
-                <input data-filter="day" class="select" type="number" id="income-day">
-              </div>
-              <div class="filter-field">
-                <label for="">Номер недели</label>
-                <select class="select" data-filter="week" id="week">
-                  <option value="Все недели">Все</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                </select>
-              </div>
+          <div class="income__filters filters">
+            <div class="filter-field">
+              <label for="income-month">Месяц</label>
+              <select data-filter='month' class='select costs__input_select-filter input-filter-date' id="income-month">
+                <option value="Все месяцы">Все</option>
+                <option value="Январь">Январь</option>
+                <option value="Февраль">Февраль</option>
+                <option value="Март">Март</option>
+                <option value="Апрель">Апрель</option>
+                <option value="Май">Май</option>
+                <option value="Июнь">Июнь</option>
+                <option value="Июль">Июль</option>
+                <option value="Август">Август</option>
+                <option value="Сентябрь">Сентябрь</option>
+                <option value="Октябрь">Октябрь</option>
+                <option value="Ноябрь">Ноябрь</option>
+                <option value="Декабрь">Декабрь</option>
+              </select>
             </div>
+            <div class="filter-field">
+              <label for="income-day">День</label>
+              <input data-filter="day" class="select" type="number" id="income-day">
+            </div>
+            <div class="filter-field">
+              <label for="income-week">Номер недели</label>
+              <select class="select" data-filter="week" id="income-week">
+                <option value="Все недели">Все</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+            </div>
+          </div>
+          <div class="">
+            <p class='income__total'>Итого: 0</p>
             <table class="table">
               <thead>
                 <th>Название</th>
@@ -113,6 +113,7 @@
             </table>
           </div>
         </div>
+        <!--  -->
         <div class="form-costs-table-wrapper">
           <form class='costs__form card main-form' action="">
             <h2>Расходы</h2>
@@ -156,9 +157,8 @@
               </select>
             </div>
             <div class="costs__date-filter filter-field">
-              <label for="">Месяц</label>
-              <select data-filter='month' class='select costs__input_select-filter input-filter-date'
-                id="category-cost">
+              <label for="costs-month">Месяц</label>
+              <select data-filter='month' class='select costs__input_select-filter input-filter-date' id="costs-month">
                 <option value="Все месяцы">Все</option>
                 <option value="Январь">Январь</option>
                 <option value="Февраль">Февраль</option>

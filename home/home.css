@@ -3,11 +3,17 @@
 }
 
 .income__form {
-	min-height: 550px;
+	min-height: 551px;
 }
 .income__heading {
 	margin-bottom: 20px;
 }
+
+.income__total {
+	margin-bottom: 12px;
+}
+
+
 
 .income__form-fields-wrapper {
 	display: flex;
@@ -259,12 +265,22 @@ input[type="number"] {
 		flex-wrap: wrap;
 	}
 	.header__list-item {
-		font-size: 12px;
+		font-size: 14px;
 	}
 }
 
-@media (max-width: 435px) {
+@media (max-width: 450px) {
 	.table {
 		font-size: 12px;
 	}
+	.header__logo {
+		display: none;
+	}
+	.header__list {
+		justify-content: space-between;
+	}
+	.header__nav {
+		width: 100%;
+	}
 }
+
