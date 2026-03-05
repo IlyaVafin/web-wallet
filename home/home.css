@@ -133,7 +133,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	padding: 16px;
 }
 
-.sidebar__balance {
+.balance {
 	padding-left: 16px;
 	font-weight: 500;
 }
@@ -293,6 +293,10 @@ input[type="number"] {
 	opacity: 0;
 	pointer-events: none;
 	transition: all 0.5s ease;
+}
+
+.mobile-balance {
+	padding-left: 32px;
 }
 
 @media (max-width: 486px) {

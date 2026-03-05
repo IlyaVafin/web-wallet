@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 let balance = parseFloat(localStorage.getItem("balance") ?? 0)
 const numericInputs = document.querySelectorAll(".numeric-input")
-const balanceElement = document.querySelector(".sidebar__balance")
+const balanceElement = document.querySelectorAll(".balance")
 const incomeForm = document.querySelector(".income__form")
 const costsForm = document.querySelector(".costs__form")
 const incomeInputs = document.querySelectorAll(".income__input")
@@ -17,13 +17,20 @@ const costsFormData = { title: "", size: 0, date: "", category: "" }
 const incomeArray = JSON.parse(localStorage.getItem("incomes")) ?? []
 const costsArray = JSON.parse(localStorage.getItem("costs")) ?? []
 const logoutButton = document.querySelectorAll(".button-logout")
-
+const mobileBalance = document.querySelector(".mobile-balance")
 const filterCostsContainer = document.querySelector(".costs__filters")
 const filterIncomeContainer = document.querySelector(".income__filters")
 const totalCosts = document.querySelector(".costs__total")
 const totalIncome = document.querySelector(".income__total")
-balanceElement.textContent = `Баланс: ${balance}`
+if (window.innerWidth <= 800) {
+	mobileBalance.style.display = "block"
+} else {
+	mobileBalance.style.display = "none"
+}
 
+balanceElement.forEach(el => {
+	el.textContent = `Баланс: ${balance}`
+})
 createTable(incomeArray, ".income-table__body", "income-row-table")
 createTable(costsArray, ".costs__table-body", "costs-row-table")
 
