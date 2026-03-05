@@ -16,7 +16,9 @@ const incomeFormData = { title: "", size: 0, date: "" }
 const costsFormData = { title: "", size: 0, date: "", category: "" }
 const incomeArray = JSON.parse(localStorage.getItem("incomes")) ?? []
 const costsArray = JSON.parse(localStorage.getItem("costs")) ?? []
-const logoutButton = document.querySelector(".button-logout")
+const logoutButton = document.querySelectorAll(".button-logout")
+console.log(logoutButton);
+
 const filtersContainer = document.querySelector(".costs__filters")
 const totalCosts = document.querySelector(".costs__total")
 balanceElement.textContent = `Баланс: ${balance}`
@@ -269,11 +271,14 @@ filtersContainer.addEventListener("change", e => {
 	const totalSum = sumTotal(".costs-row-table")
 	totalCosts.textContent = `Итого: ${formatNumber(String(totalSum))} рублей`
 })
+console.log(logoutButton);
 
-logoutButton.addEventListener("click", () => {
+logoutButton.forEach(btn => {
+	btn.addEventListener("click", () => {
 	document.cookie =
 		"isAuthorized=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
 	window.location.href = "/login/login.html"
+})
 })
 
 removeErrorOnInputClick(incomeInputs, ".income__form-field")
